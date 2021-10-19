@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <h1>插值语法，{{name}}</h1>
+        <h1>指令语法</h1>
+        <a :href="school.url">跳转</a>
+    </div>
+
+   <script type='text/javascript'>
+        Vue.config.productionTip = false //阻止vue生产提示
+        const x = new Vue({
+            // el:document.getElementById('root') 可以这样写
+            el:'#root', //用于指定当前Vue为哪个容器服务，值通常为css选择器字符串（类选择器，id选择器）
+            data() { //data中存储的数据提供给el指定容器使用
+                return {
+                    name:"Vue",
+                    school:{
+                        url:"https://mowangblog.top"
+                    }
+                }
+            },
+        })
+        
+
+        
+   </script>
+    
+</body>
+</html>
