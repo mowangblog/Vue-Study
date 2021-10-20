@@ -31,8 +31,8 @@
 		-->
 		<!-- 准备好一个容器-->
 		<div id="root">
-			<h2>欢迎来到{{name}}学习</h2>
-			<input type="text" placeholder="按下回车提示输入" @keydown.huiche="showInfo">
+			<h2>欢迎来学习{{name}}</h2>
+			<input type="text" placeholder="按下回车提示输入" @keydown.enter="showInfo">
 		</div>
 	</body>
 
@@ -43,7 +43,7 @@
 		new Vue({
 			el:'#root',
 			data:{
-				name:'尚硅谷'
+				name:'Vue'
 			},
 			methods: {
 				showInfo(e){
