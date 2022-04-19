@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Document</title>
     <script src="../js/vue.js"></script>
 </head>
+
 <body>
     <!-- 
 			初识Vue：
@@ -26,7 +28,6 @@
 									(1). if(){}
 									(2). for(){}
 		-->
- 
     <!-- 准备一个容器 -->
     <div id="root">
         <h1>Hello，{{hello}}</h1>
@@ -34,22 +35,20 @@
         <h1>Hello，{{Date.now()}}</h1>
     </div>
 
-   <script type='text/javascript'>
+    <script type='text/javascript'>
         Vue.config.productionTip = false //阻止vue生产提示
         const x = new Vue({
             // el:document.getElementById('root') 可以这样写
-            el:'#root', //用于指定当前Vue为哪个容器服务，值通常为css选择器字符串（类选择器，id选择器）
+            el: '#root', //用于指定当前Vue为哪个容器服务，值通常为css选择器字符串（类选择器，id选择器）
             data() { //data中存储的数据提供给el指定容器使用
                 return {
-                    name:"Vue",
-                    hello:"李煊"
+                    name: "Vue",
+                    hello: "李煊"
                 }
             },
         })
-        
+    </script>
 
-        
-   </script>
-   
 </body>
+
 </html>
