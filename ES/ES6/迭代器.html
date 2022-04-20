@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, 5, 6];
+        for (let item of arr) {
+            console.log(item);
+        }
+
+        const banji = {
+                name: '三年一班',
+                stus: [
+                    '李梓萌',
+                    '李子明'
+                ],
+                [Symbol.iterator]() {
+                    let index = 0;
+                    return {
+                        next: () => {
+                            if (index < this.stus.length) {
+                                return {
+                                    value: this.stus[index++],
+                                    done: false
+                                };
+                            } else {
+                                return {
+                                    value: undefined,
+                                    done: true
+                                };
+                            }
+                        }
+                    }
+
+                }
+            }
+            //遍历对象
+        for (let item of banji) {
+            console.log(item);
+        }
+    </script>
+</body>
+
+</html>
