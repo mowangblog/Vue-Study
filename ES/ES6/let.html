@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //let不能重复申明
+        let name = 'lixuan';
+        // let name = 'mowang';
+        //let是块级作用域
+        {
+            let name = 'mowang';
+            console.log(name);
+        }
+        console.log(name);
+        //let不存在变量提升,不允许申明之前使用,不影响作用域链
+        var song = '12';
+        let song = '12';
+    </script>
+</body>
+
+</html>
