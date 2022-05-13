@@ -12,7 +12,7 @@
 		data(){
 			return {
 				name:'mowang',
-				address:'北京昌平'
+				address:'深圳'
 			}
 		},
 		methods: {
