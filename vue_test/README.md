@@ -180,7 +180,7 @@
 
 3. 绑定自定义事件：
 
-    1. 第一种方式，在父组件中：```<Demo @atguigu="test"/>```  或 ```<Demo v-on:atguigu="test"/>```
+    1. 第一种方式，在父组件中：```<Demo @mowang="test"/>```  或 ```<Demo v-on:mowang="test"/>```
 
     2. 第二种方式，在父组件中：
 
@@ -188,19 +188,19 @@
         <Demo ref="demo"/>
         ......
         mounted(){
-           this.$refs.xxx.$on('atguigu',this.test)
+           this.$refs.xxx.$on('mowang',this.test)
         }
         ```
 
     3. 若想让自定义事件只能触发一次，可以使用```once```修饰符，或```$once```方法。
 
-4. 触发自定义事件：```this.$emit('atguigu',数据)```		
+4. 触发自定义事件：```this.$emit('mowang',数据)```		
 
-5. 解绑自定义事件```this.$off('atguigu')```
+5. 解绑自定义事件```this.$off('mowang')```
 
 6. 组件上也可以绑定原生DOM事件，需要使用```native```修饰符。
 
-7. 注意：通过```this.$refs.xxx.$on('atguigu',回调)```绑定自定义事件时，回调<span style="color:red">要么配置在methods中</span>，<span style="color:red">要么用箭头函数</span>，否则this指向会出问题！
+7. 注意：通过```this.$refs.xxx.$on('mowang',回调)```绑定自定义事件时，回调<span style="color:red">要么配置在methods中</span>，<span style="color:red">要么用箭头函数</span>，否则this指向会出问题！
 
 ## 全局事件总线（GlobalEventBus）
 
@@ -1000,7 +1000,7 @@ module.exports = {
    router.beforeEach((to,from,next)=>{
    	console.log('beforeEach',to,from)
    	if(to.meta.isAuth){ //判断当前路由是否需要进行权限控制
-   		if(localStorage.getItem('school') === 'atguigu'){ //权限控制的具体规则
+   		if(localStorage.getItem('school') === 'mowang'){ //权限控制的具体规则
    			next() //放行
    		}else{
    			alert('暂无权限查看')
@@ -1028,7 +1028,7 @@ module.exports = {
    beforeEnter(to,from,next){
    	console.log('beforeEnter',to,from)
    	if(to.meta.isAuth){ //判断当前路由是否需要进行权限控制
-   		if(localStorage.getItem('school') === 'atguigu'){
+   		if(localStorage.getItem('school') === 'mowang'){
    			next()
    		}else{
    			alert('暂无权限查看')
@@ -1065,5 +1065,4 @@ module.exports = {
    1. 地址干净，美观 。
    2. 兼容性和hash模式相比略差。
    3. 应用部署上线时需要后端人员支持，解决刷新页面服务端404的问题。
-	 
 	 
