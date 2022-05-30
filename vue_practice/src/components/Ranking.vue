@@ -1,7 +1,8 @@
-yyy<template>
+<template>
   <div>
-    <h1>{{ msg }}</h1>
     <h3>数据更新时间：{{updateTime}}</h3>
+    <h3>本网站仅用于交流与学习</h3>
+    <a-button type="primary" @click="loginOut()" style="margin:20px">登出账号</a-button>
     <a-affix :offset-top="top">
       <a-button type="primary" @click="updateData()" style="margin:20px">手动刷新数据</a-button>
     </a-affix>
@@ -17,7 +18,8 @@ yyy<template>
     <a-modal v-model:visible="visible" title="详情" @ok="handleOk" centered >
       <template #footer>
         <a-button key="back" @click="handleCancel">取消</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleOk()">立即购买</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk()" v-if="detail.sellStatus!==2">立即购买</a-button>
+        <a-button disabled v-else>已售出</a-button>
       </template>
       <a-descriptions title="NTF信息">
         <a-descriptions-item label="商品名">{{detail.name}}</a-descriptions-item>
@@ -42,18 +44,17 @@ export default {
   components: {
     CardTable
   },
+  props:['authorization'],
   data() {
     return {
+      intervalId:'',
       detail:{},
       loading:ref<boolean>(false),
       visible:ref<boolean>(false),
       top: ref<number>(10),
       updateTime: '',
       pre: '鲸藏',
-      title:['青龙','白虎','朱雀','玄武','姜子牙','哪吒','杨戬','申公豹','元某人','周口猿','猿小初','总有办法','红高粱','迎新娘','女神','向阳','打包'],
-      msg: '鲸藏价格监测系统',
-      authorization: 
-      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91aWQiOjM0NTYxNCwibG9naW5fdXNlcl9rZXkiOiIzYmQ1ZmM3My1lOGM1LTQ5YWUtOWMyYS1iMDU0YTQ2MmU4NzQifQ.1-p24VQilMsaPd_jd6Lc7jw_6auJf3UIqX8LIC-09HKaLy_7pLard_QcmIT85gPRcXNu5xphn1mUmtRrZ3032w',
+      title:['青龙','白虎','朱雀','玄武','姜子牙','哪吒','杨戬','申公豹','元某人','周口猿','猿小初','迎新娘','女神','向阳'],
       data:[],
     }
   },
@@ -61,6 +62,20 @@ export default {
     this.init();
   },
   methods: {
+    loginOut(){
+      axios({
+        method:'post',
+        headers:{
+           Authorization: this.authorization
+        },
+        url:'https://api.x-metash.com/api/prod/NFTMall/h5/logout'
+       }).then(res=>{
+         message.success(res.data.msg)
+      })
+      clearInterval(this.intervalId)
+      localStorage.clear('token')
+      this.$emit('loginOut');
+    },
     showModal(){
         this.visible = true;
     },
@@ -123,7 +138,7 @@ export default {
             Authorization: this.authorization
           },
           url:'https://api.x-metash.com/api/prod/NFTMall/h5/home/summary',
-          data:{"search":`${this.pre+this.title[i]}`,"pageNum":1,"pageSize":100,"isPrizeAsc":true}
+          data:{"search":`${this.pre+this.title[i]}`,"pageNum":1,"pageSize":10,"isPrizeAsc":true}
         }).then(res=>{
           this.data[i] = res.data.data
         })
@@ -136,7 +151,7 @@ export default {
       this.cycle();
     },
     cycle(){
-      setInterval(() => {
+      this.intervalId = setInterval(() => {
         this.updateData();
       }, 60 * 1000);
     }
