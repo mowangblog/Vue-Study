@@ -1,5 +1,5 @@
 <template>
-  <div class="app" style="padding: .1rem" v-if="isShow()">
+  <div class="app" style="padding: .1rem" >
     <img alt="Vue logo"  height="300" src="./assets/logo.jpg" />
      <h1>{{ msg }}</h1>
      <a-card title="登录系统" :bordered="true" v-if="!isLogin" style="width: 400px;margin-right: auto;margin-left: auto;">
@@ -20,7 +20,7 @@
      </a-card>
      <Ranking :authorization="authorization" @loginOut="isLogin = false" v-else/>
   </div>
-  <div v-else> 
+  <!-- <div v-else> 
      <h1 >服务到期，请输入激活码</h1>
      <a-card title="激活" :bordered="true" v-if="!isLogin" style="width: 400px;margin-right: auto;margin-left: auto;">
         <a-form :model="formState" >
@@ -33,7 +33,7 @@
         </a-form>
      </a-card>
      <h4 style="margin:10px">如需激活码请联系qq:2623872023获取</h4>
-  </div>
+  </div> -->
   
 </template>
 
@@ -68,22 +68,23 @@ export default {
   },
   mounted() {
     let token = localStorage.getItem("token")
-    if(token){
-      axios({
-        method:'post',
-        headers:{
-           Authorization: token
-        },
-        url:'https://api.x-metash.com/api/prod/NFTMall/h5/user'
-       }).then(res=>{
-          if(res.data.code == 200){
+    // if(token){
+    //   axios({
+    //     method:'post',
+    //     headers:{
+    //        Authorization: token
+    //     },
+    //     url:'https://api.x-metash.com/api/prod/NFTMall/h5/user'
+    //    }).then(res=>{
+    //       if(res.data.code == 200){
               this.authorization = token;
               this.isLogin = true
-          }else{
-              localStorage.clear('token')
-          }  
-      })
-    }
+              this.jump = true
+      //     }else{
+      //         localStorage.clear('token')
+      //     }  
+      // })
+    // }
   },
   methods: {
     active(){

@@ -53,8 +53,14 @@ export default {
       visible:ref<boolean>(false),
       top: ref<number>(10),
       updateTime: '',
+      //'青龙','白虎','朱雀','玄武',
+      // '姜子牙','哪吒','杨戬','申公豹','无字天书',
+      // '元某人','周口猿','猿小初','迎新娘',
+      // '女神','向阳','敬酒神',
       pre: '鲸藏',
-      title:['青龙','白虎','朱雀','玄武','姜子牙','哪吒','杨戬','申公豹','元某人','周口猿','猿小初','迎新娘','女神','向阳'],
+      title:['cyber thug','bloody guy',
+      'sup mafia','gentle mob','舞狮','白塔寺','人民广场'
+      ,'筒子河','外宾','真相','树灵'],
       data:[],
     }
   },
@@ -138,7 +144,7 @@ export default {
             Authorization: this.authorization
           },
           url:'https://api.x-metash.com/api/prod/NFTMall/h5/home/summary',
-          data:{"search":`${this.pre+this.title[i]}`,"pageNum":1,"pageSize":10,"isPrizeAsc":true}
+          data:{"search":`${this.pre+this.title[i]}`,"pageNum":1,"pageSize":50,"isPrizeAsc":true}
         }).then(res=>{
           this.data[i] = res.data.data
         })
